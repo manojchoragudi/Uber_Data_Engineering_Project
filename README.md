@@ -76,18 +76,5 @@ ub-project/
 - A production-style Kimball star schema in Gold, with full SCD Type 2 history on location.
 - A pipeline architecture supporting both batch backfill and real-time ingestion through the same downstream Silver/Gold model.
 
-## 🔧 Troubleshooting
-
-**`CBS Token authentication failed` when sending/consuming Event Hub messages**
-- Usually an `EntityPath` mismatch between the connection string and the `eventhub_name`/`EH_NAME` passed to the client — they must refer to the same entity, not the namespace.
-
-**`'NoneType' object has no attribute 'strip'` when creating the producer/consumer client**
-- The connection string environment variable isn't loading — check `.env` formatting (no quotes, no spaces around `=`) and that the script runs from the correct working directory.
-
-**`getaddrinfo failed` / `ErrorCondition.SocketError`**
-- DNS couldn't resolve the Event Hub namespace hostname — check for typos in the `Endpoint=sb://...` value.
-
-**Kafka bootstrap / node-assignment timeouts on Databricks serverless compute**
-- Serverless compute enforces Network Connectivity Config (NCC) egress rules. Ensure an NCC rule allows outbound traffic to the Event Hubs namespace on port `9093`.
   
 
